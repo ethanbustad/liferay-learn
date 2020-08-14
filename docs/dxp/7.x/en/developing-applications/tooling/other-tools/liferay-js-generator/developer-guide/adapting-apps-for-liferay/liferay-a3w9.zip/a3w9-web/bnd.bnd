@@ -1,0 +1,4 @@
+Bundle-Name: A3W9 Web
+Bundle-SymbolicName: com.acme.a3w9.web
+Bundle-Version: 1.0.0
+Web-ContextPath: /a3w9-web
