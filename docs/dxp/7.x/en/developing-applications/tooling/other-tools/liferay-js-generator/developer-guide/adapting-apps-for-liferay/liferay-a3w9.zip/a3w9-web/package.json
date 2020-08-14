@@ -12,7 +12,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build:liferay": "lnbs-build",
+    "deploy:liferay": "npm run build:liferay && lnbs-deploy"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -22,5 +24,17 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "liferay-npm-build-support": "^2.18.8",
+    "liferay-npm-bundler": "^2.18.8",
+    "liferay-npm-bundler-preset-create-react-app": "^2.18.8"
+  },
+  "portlet": {
+    "com.liferay.portlet.display-category": "category.sample",
+    "javax.portlet.name": "a3w9web",
+    "javax.portlet.security-role-ref": "power-user,user",
+    "javax.portlet.resource-bundle": "content.Language",
+    "com.liferay.portlet.instanceable": true
+  }
 }
