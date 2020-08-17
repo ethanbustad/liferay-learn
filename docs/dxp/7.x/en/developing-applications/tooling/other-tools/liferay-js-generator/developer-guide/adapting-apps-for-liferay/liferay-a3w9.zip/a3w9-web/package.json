@@ -26,9 +26,9 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "liferay-npm-build-support": "^2.18.8",
-    "liferay-npm-bundler": "^2.18.8",
-    "liferay-npm-bundler-preset-create-react-app": "^2.18.8"
+    "liferay-npm-build-support": "2.13.3",
+    "liferay-npm-bundler": "2.13.3",
+    "liferay-npm-bundler-preset-create-react-app": "2.13.3"
   },
   "portlet": {
     "com.liferay.portlet.display-category": "category.sample",
