@@ -15,7 +15,7 @@ First, deploy an example adapted application:
     ```
 
 1. Download and unzip the [example adapted app](https://github.com/liferay/liferay-learn/tree/master/docs/dxp/7.x/en/developing-applications/tooling/other-tools/liferay-js-generator/developer-guide/adapting-apps-for-liferay/liferay-a3w9.zip):
-		
+
     ```bash
     curl https://learn.liferay.com/dxp/7.x/en/developing-applications/tooling/other-tools/liferay-js-generator/developer-guide/adapting-apps-for-liferay/liferay-a3w9.zip
 
@@ -86,7 +86,7 @@ First, deploy an example adapted application:
 
 ## Adapted Application Requirements and Processing
 
-Adapted applications must meet these requirements: 
+Adapted applications must meet these requirements:
 
 * **Angular CLI projects** must use `app-root` as the application's DOM selector.
 * **creact-react-app projects** must use `ReactDom.render()` call in the entry point with a `document.getElementById()` parameter.
