@@ -1,0 +1,3 @@
+Bundle-Name: Acme E8I7 Info List Provider Extension
+Bundle-SymbolicName: com.acme.e8i7.impl
+Bundle-Version: 1.0.0
