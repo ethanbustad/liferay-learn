@@ -1,3 +1,21 @@
+package com.acme.e8i7.internal;
+
+import com.liferay.info.list.provider.InfoListProvider;
+import com.liferay.info.list.provider.InfoListProviderContext;
+import com.liferay.info.pagination.Pagination;
+import com.liferay.info.sort.Sort;
+import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.util.ResourceBundleLoader;
+
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.ResourceBundle;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+
 @Component(immediate = true, service = InfoListProvider.class)
 public class StarshipEntryInfoListProvider
 	implements InfoListProvider<StarshipEntry> {
