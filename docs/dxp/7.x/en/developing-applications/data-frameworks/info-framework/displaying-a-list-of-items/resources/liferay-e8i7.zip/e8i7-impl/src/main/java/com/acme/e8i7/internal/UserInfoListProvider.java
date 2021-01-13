@@ -4,31 +4,39 @@ import com.liferay.info.list.provider.InfoListProvider;
 import com.liferay.info.list.provider.InfoListProviderContext;
 import com.liferay.info.pagination.Pagination;
 import com.liferay.info.sort.Sort;
+import com.liferay.portal.kernel.dao.search.SearchContainer;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.Group;
-import com.liferay.portal.kernel.util.ResourceBundleLoader;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.UserService;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
-import java.util.ResourceBundle;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 @Component(immediate = true, service = InfoListProvider.class)
-public class StarshipEntryInfoListProvider
-	implements InfoListProvider<StarshipEntry> {
+public class UserInfoListProvider implements InfoListProvider<User> {
 
 	@Override
-	public List<StarshipEntry> getInfoList(
+	public List<User> getInfoList(
 		InfoListProviderContext infoListProviderContext) {
 
-		return getInfoList(infoListProviderContext, null, null);
+		return getInfoList(
+			infoListProviderContext,
+			Pagination.of(SearchContainer.DEFAULT_DELTA, 0),
+			new Sort("lastName", false));
 	}
 
 	@Override
-	public List<StarshipEntry> getInfoList(
+	public List<User> getInfoList(
 		InfoListProviderContext infoListProviderContext, Pagination pagination,
 		Sort sort) {
 
@@ -37,8 +45,20 @@ public class StarshipEntryInfoListProvider
 
 		Group group = groupOptional.get();
 
-		return _starshipEntryLocalService.getStarshipEntries(
-			group.getGroupId(), pagination.getStart(), pagination.getEnd());
+		OrderByComparator<User> orderByComparator =
+			OrderByComparatorFactoryUtil.create(
+				"User_", sort.getFieldName(), !sort.isReverse());
+
+		try {
+			return _userService.getGroupUsers(
+				group.getGroupId(), WorkflowConstants.STATUS_APPROVED,
+				pagination.getStart(), pagination.getEnd(), orderByComparator);
+		}
+		catch (PortalException portalException) {
+			portalException.printStackTrace();
+
+			return Collections.emptyList();
+		}
 	}
 
 	@Override
@@ -50,22 +70,23 @@ public class StarshipEntryInfoListProvider
 
 		Group group = groupOptional.get();
 
-		return _starshipEntryLocalService.getStarshipEntriesCount(
-			group.getGroupId());
+		try {
+			return _userService.getGroupUsersCount(
+				group.getGroupId(), WorkflowConstants.STATUS_APPROVED);
+		}
+		catch (PortalException portalException) {
+			portalException.printStackTrace();
+
+			return 0;
+		}
 	}
 
 	@Override
 	public String getLabel(Locale locale) {
-		ResourceBundle resourceBundle =
-			_resourceBundleLoader.loadResourceBundle(locale);
-
-		return LanguageUtil.get(resourceBundle, "starship-entries");
+		return LanguageUtil.get(locale, "users");
 	}
 
-	@Reference(target = "(bundle.symbolic.name=com.liferay.starship.service)")
-	private ResourceBundleLoader _resourceBundleLoader;
-
 	@Reference
-	private StarshipEntryLocalService _starshipEntryLocalService;
+	private UserService _userService;
 
 }
