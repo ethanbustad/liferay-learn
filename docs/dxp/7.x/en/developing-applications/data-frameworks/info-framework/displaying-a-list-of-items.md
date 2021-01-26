@@ -2,7 +2,7 @@
 
 In Liferay 7.3 we have introduced new concepts such as Collection Pages and a new type of fragment called Collection Display Fragments.
 
-In this document we'll show you step by step the classes and logic that need to be implemented to allow us to create a collection page for our entity, and also to list our items in a Collection Display Fragment, since they go hand in hand. We'll use an entity called `StarshipEntry` with the following definition:
+In this document we'll show you step by step the classes and logic that need to be implemented to allow us to create a Collection Page for our entity, and also to list our items in a Collection Display Fragment, since they go hand in hand. We'll use an entity called `StarshipEntry` with the following definition:
 
 | Column Name          | Type   |
 |----------------------|--------|
@@ -79,3 +79,7 @@ public class StarshipEntryInfoListProvider
 ```
 
 Once this is deployed we'll be able to select the `InfoListProvider` under _Content Provider_ when selecting the data source for a Collection Display Fragment. We'll also be able to create Collection Pages for it.
+
+[
+Go to Site Builder > Collections > Collection Providers tab to confirm your new provider is deployed and working properly. From there, you can view what data is being supplied by clicking View Items in the action menu for your provider's row.
+]
