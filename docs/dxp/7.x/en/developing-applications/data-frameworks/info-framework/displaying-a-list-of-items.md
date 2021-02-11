@@ -83,3 +83,7 @@ Once this is deployed we'll be able to select the `InfoListProvider` under _Cont
 [
 Go to Site Builder > Collections > Collection Providers tab to confirm your new provider is deployed and working properly. From there, you can view what data is being supplied by clicking View Items in the action menu for your provider's row.
 ]
+
+[
+Create a Collection Page, select your provider, give it a name, and you should see your items populated (very simplistically).
+]

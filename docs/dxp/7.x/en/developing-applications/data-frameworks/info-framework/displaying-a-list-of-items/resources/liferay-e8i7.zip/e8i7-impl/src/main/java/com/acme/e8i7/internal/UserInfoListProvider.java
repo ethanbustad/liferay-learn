@@ -7,6 +7,8 @@ import com.liferay.info.sort.Sort;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.UserService;
@@ -45,9 +47,12 @@ public class UserInfoListProvider implements InfoListProvider<User> {
 
 		Group group = groupOptional.get();
 
-		OrderByComparator<User> orderByComparator =
-			OrderByComparatorFactoryUtil.create(
+		OrderByComparator<User> orderByComparator = null;
+
+		if (sort != null) {
+			orderByComparator = OrderByComparatorFactoryUtil.create(
 				"User_", sort.getFieldName(), !sort.isReverse());
+		}
 
 		try {
 			return _userService.getGroupUsers(
@@ -75,16 +80,19 @@ public class UserInfoListProvider implements InfoListProvider<User> {
 				group.getGroupId(), WorkflowConstants.STATUS_APPROVED);
 		}
 		catch (PortalException portalException) {
-			portalException.printStackTrace();
-
-			return 0;
+			_log.error(portalException, portalException);
 		}
+
+		return 0;
 	}
 
 	@Override
 	public String getLabel(Locale locale) {
 		return LanguageUtil.get(locale, "users");
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		UserInfoListProvider.class);
 
 	@Reference
 	private UserService _userService;
