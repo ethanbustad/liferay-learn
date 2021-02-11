@@ -1,11 +1,11 @@
 package com.acme.e8i7.internal;
 
+import com.liferay.info.item.selector.InfoItemSelectorView;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.ItemSelectorView;
 import com.liferay.item.selector.ItemSelectorViewDescriptor;
 import com.liferay.item.selector.ItemSelectorViewDescriptorRenderer;
 import com.liferay.item.selector.criteria.InfoItemItemSelectorReturnType;
-import com.liferay.info.item.selector.InfoItemSelectorView;
 import com.liferay.item.selector.criteria.info.item.criterion.InfoItemItemSelectorCriterion;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -37,14 +37,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
-
 @Component(
 	property = "item.selector.view.order:Integer=200",
 	service = ItemSelectorView.class
 )
 public class UserItemSelectorView
 	implements InfoItemSelectorView,
-		ItemSelectorView<InfoItemItemSelectorCriterion> {
+			   ItemSelectorView<InfoItemItemSelectorCriterion> {
 
 	@Override
 	public String getClassName() {
@@ -176,14 +175,12 @@ public class UserItemSelectorView
 		public SearchContainer<User> getSearchContainer()
 			throws PortalException {
 
-			SearchContainer<User> searchContainer =
-				new SearchContainer<>(
-					_portletRequest, _portletURL, null, "no-users-were-found");
+			SearchContainer<User> searchContainer = new SearchContainer<>(
+				_portletRequest, _portletURL, null, "no-users-were-found");
 
-			List<User> users =
-				_userService.getCompanyUsers(
-					_themeDisplay.getCompanyId(), searchContainer.getStart(),
-					searchContainer.getEnd());
+			List<User> users = _userService.getCompanyUsers(
+				_themeDisplay.getCompanyId(), searchContainer.getStart(),
+				searchContainer.getEnd());
 
 			searchContainer.setResults(users);
 

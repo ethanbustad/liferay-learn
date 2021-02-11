@@ -1,8 +1,8 @@
 package com.acme.e8i7.internal;
 
+import com.liferay.layout.display.page.LayoutDisplayPageObjectProvider;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
-import com.liferay.layout.display.page.LayoutDisplayPageObjectProvider;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.util.Portal;
 
@@ -11,9 +11,7 @@ import java.util.Locale;
 public class UserLayoutDisplayPageObjectProvider
 	implements LayoutDisplayPageObjectProvider<User> {
 
-	public UserLayoutDisplayPageObjectProvider(
-		User user, Portal portal) {
-
+	public UserLayoutDisplayPageObjectProvider(User user, Portal portal) {
 		_user = user;
 		_portal = portal;
 	}

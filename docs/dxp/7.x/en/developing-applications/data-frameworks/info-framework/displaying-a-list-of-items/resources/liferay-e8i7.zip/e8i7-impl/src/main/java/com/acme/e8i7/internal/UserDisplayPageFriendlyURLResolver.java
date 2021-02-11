@@ -1,7 +1,7 @@
 package com.acme.e8i7.internal;
 
-import com.liferay.portal.kernel.portlet.FriendlyURLResolver;
 import com.liferay.asset.display.page.portlet.BaseAssetDisplayPageFriendlyURLResolver;
+import com.liferay.portal.kernel.portlet.FriendlyURLResolver;
 
 import org.osgi.service.component.annotations.Component;
 

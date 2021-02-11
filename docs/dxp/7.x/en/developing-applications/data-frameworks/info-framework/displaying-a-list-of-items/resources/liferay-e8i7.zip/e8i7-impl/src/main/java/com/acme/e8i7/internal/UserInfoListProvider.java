@@ -60,10 +60,10 @@ public class UserInfoListProvider implements InfoListProvider<User> {
 				pagination.getStart(), pagination.getEnd(), orderByComparator);
 		}
 		catch (PortalException portalException) {
-			portalException.printStackTrace();
-
-			return Collections.emptyList();
+			_log.error(portalException, portalException);
 		}
+
+		return Collections.emptyList();
 	}
 
 	@Override
