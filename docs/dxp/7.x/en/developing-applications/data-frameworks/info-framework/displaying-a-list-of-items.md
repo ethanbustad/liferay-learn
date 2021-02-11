@@ -111,24 +111,30 @@ Publishing the page at this stage will lead to the page being blank -- this is b
 
 [
 Go to Site Builder > Collections > Collection Providers tab to confirm your new provider is deployed and working properly. From there, you can view what data is being supplied by clicking View Items in the action menu for your provider's row.
+_Sigh_... except that doesn't work. It only works if you have specific fields on your entity (or maybe even have to supply the fields in a different class or something... maybe the UserItemSelectorView class? Can't remember exactly :cry:). If you have those fields, then it shows them (title, description, something like that -- seems web-content- or blogs- oriented). Otherwise, it throws an NPE when you try to view this modal :(. So then -- how standalone is this article/class?
 ]
 
 [
-Create a Collection Page, select your provider, give the page a name, and you should see your items populated (very simplistically).
+"Create a Collection Page, select your provider, give the page a name, and you should see your items populated (very simplistically)."
+^ At least this works. It's just very simplistic, and it feels like it's avoiding the more obvious ways of checking the success of your deployment (because... those other ways will fail without other classes implemented).
 ]
 
 [
-bridge to another article at the beginning or the end can make sense if they're super related, and should go in a certain order
-]
-
-[
-some other articles are small like this -- super small but there is value
+Some points I've gathered from the team and tried to keep in mind re: this article:
+- Including a bridge to another article, like an explicit "previous step" or "next step", at the beginning or end can make sense in our system if the articles are super related, and should go in a certain order
+- some other articles are quite short like this -- there can be value in super short articles. But... I'm still concerned -- is this too short and granular to be helpful?
 ]
 
 [
 Alec's articles to cross link to: displaying-content/displaying-collections/developer-guide/: https://github.com/sez11a/liferay-learn/pull/305
+I think this would definitely be helpful content to link to.
 ]
+
+
+[
+The following header and paragraph were included near the top of the draft as given to me by Jürgen. But I'm not sure they're relevant here -- they may have just been copy pasta (all of the drafts had this, or something like it). Problem is, it _could_ make sense with just slightly different content, if it were indicating to the reader what they might do next -- i.e. map the fields so that you can actually show something more realistic on the frontend, with data supplied by this provider.
 
 ## Mapping of Fields
 
 To take full advantage of the Collection Display Fragment, we should allow Users to _map_ the fields (that is, select which fields to display and how to display them) for the object that we selected. In order to achieve this, we just have to implement a few classes.
+]
